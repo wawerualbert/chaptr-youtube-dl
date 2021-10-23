@@ -71,15 +71,8 @@ tk.Button(master, text='Select Destination', command=destination).grid(row=0, co
 destination_label = ttk.Label(master, text= "Chaptr Youtube-dl" , foreground = 'green' , background = 'white' ,font = ('Times New Roman' , 16 , 'bold'))
 destination_label.grid(column = 6, row = 0 , sticky=tk.W,pady=4)
 
-var = IntVar()
-download_button = Radiobutton(master, text="Download Full Playlist", variable=var, value=1,
-                  command=sel).grid(row= 4 , column = 0)
-
-download_playlist_button = Radiobutton(master, text="Range of Videos", variable=var, value=2,
-                  command=sel).grid(row= 5 , column = 0)
+master.geometry("500x200")
 ran = tk.Entry(master , width=10)
-
-ran.grid(row=5, column=1)
 
 label = Label(master)
 label.grid(row= 7 , column = 0)
