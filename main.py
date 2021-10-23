@@ -16,28 +16,9 @@ def download_video():
 		destination_label.configure(text='Please Select Destination!')
 	else:   
 		link = e1.get()
-		if link == '':  # Checking whether User gave Link or not
+		if link is '':  # Checking whether User gave Link or not
 			destination_label.configure(text='Paste Link!')
 			return
-		elif 'playlist' in link:   # Particular actions for Playlist
-			if var.get() == 0:
-				destination_label.configure(text='Playlist Found.. Please Select Actions Below')
-			elif var.get() == 1:
-				destination_label.configure(text='Downloading...')
-				cmd = 'youtube-dl -i ' + link
-				# cmd = 'youtube-dl -o "%(playlist_index)s-%(title)s.%(ext)s" https://www.youtube.com/playlist?list=' + link.split('=')[-1]
-				th = threading.Thread(target=running, args=(cmd,))
-				th.start()
-				#subprocess.call(cmd, shell=True, cwd=dest.get())
-			elif var.get() == 2:
-				destination_label.configure(text='Downloading.. Range of Videos All Actions will be Stopped!')
-				r = ran.get().split('-')
-				cmd = 'youtube-dl --playlist-start ' + str(r[0]) + ' --playlist-end ' + str(r[1]) + ' ' + link
-				th = threading.Thread(target=running, args=(cmd,))
-				th.start()
-				#subprocess.call(cmd, shell=True, cwd=dest.get())
-			else:
-				destination_label.configure(text='Some Error!')
 		else:     # Single Video Link Found and it will download
 			cmd = 'youtube-dl -i ' + link.split('&')[0]
 			th = threading.Thread(target=running, args=(cmd,))
@@ -48,17 +29,9 @@ def destination():  # Opening File Dialog to select Destination Folder
 	global dest
 	act = filedialog.askdirectory()
 	dest.set(act)
-	print(f'Selectedzz : {dest.get()}')
+	print(f'Selected directory : {dest.get()}')
 	destination_label.configure(text=dest.get())
 
-def sel():   # Radio Button Function On Choosing
-	if var.get() == 2:
-   		selection = "Give Range eg: 5-9"
-   		label.config(text = selection)
-
-	if var.get() == 1:
-   		selection = "You selected to Download Full playlist"
-   		label.config(text = selection)	
 master.title("Chaptr Youtube Downloader")
 
 tk.Label(master,text="Enter URL Here").grid(row=0)
